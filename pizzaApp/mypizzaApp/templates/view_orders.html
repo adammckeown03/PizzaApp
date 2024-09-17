@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>All Orders</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    {% for order in orders %}
+                        <li>
+                            <a href="{% url 'view_order_details' order_id=order.pk %}">
+                                Ordered on: {{ order.order_datetime|date:"F d, Y" }} at {{ order.order_datetime|time:"h:i A" }}
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li>No orders available.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'create_order' %}" style="display: inline-block; padding: 8px 16px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; font-size: 14px; cursor: pointer;">Create Order</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card mt-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">Order Confirmation</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Delivery Information</h4>
+                        <p class="card-text"><strong>Delivery Address:</strong> {{ order.address }}</p>
+                        <p class="card-text"><strong>Delivery Date/Time:</strong> {{ order.order_datetime|date:"F d, Y" }} at {{ order.order_datetime|time:"h:i A" }}</p>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Pizza Details</h4>
+                        <p class="card-text"><strong>Size:</strong> {{ order.pizza.size.name }}</p>
+                        <p class="card-text"><strong>Toppings:</strong></p>
+                        <ul class="list-unstyled">
+                            {% for topping in order.pizza.toppings.all %}
+                                <li>{{ topping.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="card-text"><strong>Crust Type:</strong> {{ order.pizza.crust.name }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="mb-0">Thank you for your order! ETA 30 Minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
